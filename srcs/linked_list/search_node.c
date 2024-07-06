@@ -15,13 +15,13 @@ node_t *search_node(linked_list_t *li, void *name,
 
     if (is_empty_list(li))
         return NULL;
-    if (func(name, li->begin->data) == 0)
+    if (func(name, li->begin->data))
         return li->begin;
-    if (func(name, li->end->data) == 0)
+    if (func(name, li->end->data))
         return li->end;
     tmp = li->begin->next;
     while (tmp != NULL) {
-        if (func(name, tmp->data) == 0)
+        if (func(name, tmp->data))
             return tmp;
         tmp = tmp->next;
     }
