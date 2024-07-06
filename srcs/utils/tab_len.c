@@ -18,8 +18,10 @@ int tab_len(char **tab)
 char **tab_dup(char **tab)
 {
     char **res = malloc(sizeof(char *) * (tab_len(tab) + 1));
+    int i = 0;
 
-    for (int i = 0; tab[i]; i++)
+    for (; tab[i]; i++)
         res[i] = my_strdup(tab[i]);
+    res[i] = 0;
     return res;
 }
