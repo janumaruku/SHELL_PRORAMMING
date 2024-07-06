@@ -13,6 +13,8 @@ extern char **t_env;
 
 int cmd_seg(char c);
 
+int env_var_search(void *expected, void *data);
+
 int interpretor(char **cmd);
 
 int main_loop(void);

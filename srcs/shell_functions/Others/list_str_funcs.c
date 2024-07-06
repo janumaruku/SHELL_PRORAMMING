@@ -23,3 +23,14 @@ void str_pop (void *data)
 
     free(d);
 }
+
+int env_var_search(void *expected, void *data)
+{
+    char *e = (char *)expected;
+    char *d = (char *)data;
+
+    if (my_strncmp(e, d, my_strlen(e)) == 0 &&
+        d[my_strlen(e)] == '=')
+        return 1;
+    return 0;
+}
