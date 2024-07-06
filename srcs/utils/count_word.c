@@ -15,8 +15,9 @@ int count_word(char const *str, int (*func)(char))
     while (str[i]) {
         while (str[i] && !func(str[i]))
             i++;
-        if (func(str[i]) && !str[i])
+        if (func(str[i])) {
             c++;
+        }
         while (str[i] && func(str[i]))
             i++;
     }
