@@ -22,6 +22,7 @@ char **prompt(void)
         exit_cmd = malloc(sizeof(char *) * 2);
         exit_cmd[0] = my_strdup("exit");
         exit_cmd[1] = NULL;
+        free(line);
         my_exit(exit_cmd);
     }
     if (is_empty_line(line))
