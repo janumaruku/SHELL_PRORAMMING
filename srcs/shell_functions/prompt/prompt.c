@@ -7,6 +7,7 @@
 
 #include "../../../include/shell.h"
 #include "../../../include/utils.h"
+#include "../../../include/prompt.h"
 
 char **prompt(void)
 {
@@ -16,7 +17,7 @@ char **prompt(void)
     char **exit_cmd = NULL;
     char **cmd = NULL;
 
-    my_putstr("[janumaruku] user>");
+    my_putstr("[janumaruku] user> ");
     g = getline(&line, &l, stdin);
     if (g == -1) {
         exit_cmd = malloc(sizeof(char *) * 2);
@@ -30,4 +31,46 @@ char **prompt(void)
     cmd = split(line, cmd_seg);
     free(line);
     return cmd;
+}
+
+int arrow_key_handling(line_edition_t *p)
+{
+    char c = getchar();
+
+    if (c == 'C') {
+        
+    }
+}
+
+int multi_char_binding(line_edition_t *p)
+{
+    char c = 0;
+    char *bindkey = "ABCD";
+    line_edition_t * (*func)(line_edition_t *)[4] =
+    {up_history, down_history, forward_char, backward_char};
+
+    getchar();
+    for (int i = 0; bindkey[i]; i++) {
+        if (c == bindkey[i]) {
+            p = func(p);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+char *prompt2(void)
+{
+    char c = 0;
+    line_edition_t *p = malloc(sizeof(line_edition_t));
+
+    enable_raw_mode();
+    my_putstr("[janumaruku] user> ");
+    while (1) {
+        c = getchar();
+        if (c == 27) {
+            multi_char_binding(p);
+            continue;
+        }
+    }
 }
