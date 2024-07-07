@@ -8,6 +8,7 @@
 #include "../../../include/linked_list.h"
 #include "../../../include/utils.h"
 #include "../../../include/shell.h"
+#include "../../../include/prompt.h"
 
 int main_loop(void)
 {
@@ -17,7 +18,6 @@ int main_loop(void)
         cmd = prompt();
         if (!cmd)
             continue;
-        disp_2d_array(cmd);
         interpretor(cmd);
         free_2d_array(cmd);
     }
