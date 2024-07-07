@@ -9,28 +9,57 @@
 #include "../../../include/utils.h"
 #include "../../../include/linked_list.h"
 
-int env_var_search(void *expected, void *data)
-{
-    char *e = (char *)expected;
-    char *d = (char *)data;
-
-    if (my_strncmp(e, d, my_strlen(e)) == 0 &&
-        d[my_strlen(e)] == '=')
-        return 1;
-    return 0;
-}
-
 char *my_getenv(char *varname)
 {
-    pnode_t node = search_node(l_env, "PATH=", env_var_search);
+    pnode_t node = search_node(l_env, varname, env_var_search);
+    int i = 0;
+    char *str = (char *)node->data;
+
+    for (; str[i] != '='; i++);
+    return my_strdup(&str[i + 1]);
+}
+
+char *find_path(char *var, char *cmd)
+{
+    char **var_tab = split(var, colon_seg);
+    int i = 0;
+    int len = my_strlen(cmd) + 2;
+    char *str;
+
+    for (; var_tab[i]; i++) {
+        str = malloc(sizeof(char) * (my_strlen(var_tab[i]) + len));
+        str[0] = 0;
+        my_strcat(str, var_tab[i]);
+        my_strcat(str, "/");
+        my_strcat(str, cmd);
+        if (access(str, X_OK) == 0) {
+            free_2d_array(var_tab);
+            return str;
+        }
+        free(str);
+    }
+    free_2d_array(var_tab);
+    return NULL;
 }
 
 int interpretor(char **cmd)
 {
-
+    char *var = my_getenv("PATH");
+    char *path = find_path(var, cmd[0]);
     if (access(cmd[0], X_OK) == 0) {
         runner(cmd[0], cmd);
+        free(var);
+        free(path);
         return 0;
     }
+    if (path) {
+        runner(path, cmd);
+        free(var);
+        free(path);
+        return 0;
+    }
+    fprintf(stderr, "%s: command not found.\n", cmd[0]);
+    free(var);
+    free(path);
     return 0;
 }
