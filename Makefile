@@ -23,7 +23,11 @@ SRCS	=	srcs/linked_list/clear_list.c\
 			srcs/shell_functions/main_loop/main_loop.c\
 			srcs/shell_functions/Others/list_str_funcs.c\
 			srcs/shell_functions/Others/separator.c\
+			srcs/shell_functions/prompt/delete_character.c\
+			srcs/shell_functions/prompt/multi_char_binding.c\
+			srcs/shell_functions/prompt/others.c\
 			srcs/shell_functions/prompt/prompt.c\
+			srcs/shell_functions/prompt/raw_mode.c\
 			srcs/utils/count_word.c\
 			srcs/utils/disp_2d_array.c\
 			srcs/utils/err_putchar.c\
@@ -46,6 +50,7 @@ SRCS	=	srcs/linked_list/clear_list.c\
 			srcs/utils/my_strlen.c\
 			srcs/utils/my_strncmp.c\
 			srcs/utils/split.c\
+			srcs/utils/swap.c\
 			srcs/utils/tab_len.c\
 			srcs/utils/split_semicolon.c\
 

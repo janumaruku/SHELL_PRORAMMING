@@ -13,12 +13,15 @@
 int main_loop(void)
 {
     char **cmd = NULL;
+    char *cli = NULL;
 
     while (1) {
-        cmd = prompt();
-        if (!cmd)
+        cli = prompt2();
+        if (!cli)
             continue;
+        cmd = split(cli, cmd_seg);
         interpretor(cmd);
+        free(cli);
         free_2d_array(cmd);
     }
 }

@@ -62,6 +62,8 @@ char **split(char const *str, int (*func)(char));
 
 char **split_colons(char *str);
 
+void swap_char(char *a, char *b);
+
 char **tab_dup(char **tab);
 
 int tab_len(char **tab);
