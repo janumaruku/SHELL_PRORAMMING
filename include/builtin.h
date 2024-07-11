@@ -7,6 +7,8 @@
 
 int builtin(char **cmd);
 
+int my_cd(char **cmd);
+
 int my_env(char **cmd);
 
 int my_exit(char **cmd);

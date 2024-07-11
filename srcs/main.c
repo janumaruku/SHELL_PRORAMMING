@@ -11,12 +11,13 @@
 
 plist_t l_env;
 char **t_env;
+char *past_dir;
 
 int main(int argc, char *argv[], char *env[])
 {
     l_env = tab_to_list(env);
     t_env = tab_dup(env);
-
+    past_dir = NULL;
     main_loop();
     return 0;
 }
