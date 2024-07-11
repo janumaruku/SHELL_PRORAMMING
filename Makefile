@@ -20,6 +20,7 @@ SRCS	=	srcs/linked_list/clear_list.c\
 			srcs/shell_functions/builtins/my_env.c\
 			srcs/shell_functions/builtins/my_exit.c\
 			srcs/shell_functions/builtins/my_setenv.c\
+			srcs/shell_functions/builtins/my_unsetenv.c\
 			srcs/shell_functions/cli_execution/execute.c\
 			srcs/shell_functions/cli_execution/interpretor.c\
 			srcs/shell_functions/main_loop/main_loop.c\

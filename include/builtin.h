@@ -13,4 +13,6 @@ int my_exit(char **cmd);
 
 int my_setenv(char **cmd);
 
+int my_unsetenv(char **cmd);
+
 #pragma once
