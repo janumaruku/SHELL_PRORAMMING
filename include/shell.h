@@ -23,8 +23,6 @@ int interpretor(char **cmd);
 
 int main_loop(void);
 
-int my_exit(char **cmd);
-
 int runner(char *path, char **cmd);
 
 void str_disp(void *data, void *sep, int b);
