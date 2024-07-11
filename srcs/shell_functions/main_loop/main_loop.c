@@ -9,6 +9,7 @@
 #include "../../../include/utils.h"
 #include "../../../include/shell.h"
 #include "../../../include/prompt.h"
+#include "../../../include/builtin.h"
 
 int main_loop(void)
 {
@@ -16,12 +17,18 @@ int main_loop(void)
     char *cli = NULL;
 
     while (1) {
-        cli = prompt2();
-        if (!cli)
+        cmd = prompt2();
+        // disp_2d_array(cmd);
+        if (!cmd)
             continue;
-        cmd = split(cli, cmd_seg);
+        // cmd = split(cli, cmd_seg);
+        if (builtin(cmd)) {
+            // free(cli);
+            free_2d_array(cmd);
+            continue;
+        }
         interpretor(cmd);
-        free(cli);
+        // free(cli);
         free_2d_array(cmd);
     }
 }

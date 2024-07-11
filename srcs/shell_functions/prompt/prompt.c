@@ -8,6 +8,7 @@
 #include "../../../include/shell.h"
 #include "../../../include/utils.h"
 #include "../../../include/prompt.h"
+#include "../../../include/builtin.h"
 
 // char **prompt(void)
 // {
@@ -93,10 +94,10 @@ void m_prompt(void)
     my_putstr("[janumaruku] user> ");
 }
 
-char *prompt2(void)
+char **prompt2(void)
 {
     char c = 0;
-    char *res = NULL;
+    char **res = NULL;
     line_edition_t *p = init_line_edition();
 
     enable_raw_mode();
@@ -106,7 +107,12 @@ char *prompt2(void)
         c = getchar();
         if (c == '\n') {
             p = enter(p);
-            res = p->cmd;
+            if (!p->cmd) {
+                free(p);
+                return NULL;
+            }
+            res = split(p->cmd, cmd_seg);
+            free(p->cmd);
             free(p);
             return res;
         }
@@ -117,7 +123,12 @@ char *prompt2(void)
         if (c >= 0 && c <= 31) {
             others(p, c);
             if (p->done) {
-                res = p->cmd;
+                if (!p->cmd) {
+                    free(p);
+                    return NULL;
+                }
+                res = split(p->cmd, cmd_seg);
+                free(p->cmd);
                 free(p);
                 return res;
             }

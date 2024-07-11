@@ -11,6 +11,8 @@
 
 extern plist_t l_env;
 
+extern char *past_dir;
+
 extern char **t_env;
 
 int cmd_seg(char c);
@@ -23,7 +25,7 @@ int interpretor(char **cmd);
 
 int main_loop(void);
 
-int my_exit(char **cmd);
+char *my_getenv(char *varname);
 
 int runner(char *path, char **cmd);
 

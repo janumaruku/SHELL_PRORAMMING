@@ -8,6 +8,7 @@
 #include "../../../include/shell.h"
 #include "../../../include/utils.h"
 #include "../../../include/prompt.h"
+#include "../../../include/builtin.h"
 
 line_edition_t *nullable(line_edition_t *p)
 {
