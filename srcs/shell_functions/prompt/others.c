@@ -26,6 +26,12 @@ line_edition_t *line_begin(line_edition_t *p)
     return p;
 }
 
+void ctrl_c_handler(int signum)
+{
+    printf("SIGINT received.\n");
+    return;
+}
+
 line_edition_t *tty_sigintr(line_edition_t *p)
 {
     return p;
@@ -127,16 +133,25 @@ line_edition_t *kill_whole_line(line_edition_t *p)
     return p;
 }
 
+void ctrl_z_handler(int signum)
+{
+    return;
+}
+
+line_edition_t *control_z(line_edition_t *p)
+{
+    return p;
+}
+
 int others(line_edition_t *p, char c)
 {
     line_edition_t *(*func[32])(line_edition_t *) = {
         nullable, line_begin, backward_char, tty_sigintr, end_of_file,
         end_of_line, forward_char, undefined, backspace, autocomplete,
-        enter, kill_line, clear_screen, enter, down_history,
-        nullable, up_history, nullable, nullable, nullable,
-        transpose_chars,  kill_whole_line, nullable, kill_region, nullable,
-        nullable, nullable, nullable, nullable, nullable,
-        nullable, nullable
+        enter, kill_line, clear_screen, enter, down_history, nullable,
+        up_history, nullable, nullable, nullable, transpose_chars,
+        kill_whole_line, nullable, kill_region, nullable, nullable,
+        nullable, nullable, nullable, nullable, nullable, control_z
     };
 
     for (int i = 0; i <= 31; i++) {
