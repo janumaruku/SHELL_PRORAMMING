@@ -7,11 +7,14 @@
 
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <signal.h>
 #include "linked_list.h"
 
 extern plist_t l_env;
 
 extern char *past_dir;
+
+extern int cur_process;
 
 extern char **t_env;
 
