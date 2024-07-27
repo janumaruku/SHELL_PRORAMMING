@@ -25,6 +25,7 @@ SRCS	=	srcs/linked_list/clear_list.c\
 			srcs/shell_functions/cli_execution/execute.c\
 			srcs/shell_functions/cli_execution/interpretor.c\
 			srcs/shell_functions/main_loop/main_loop.c\
+			srcs/shell_functions/Others/jobs_utils.c\
 			srcs/shell_functions/Others/list_str_funcs.c\
 			srcs/shell_functions/Others/separator.c\
 			srcs/shell_functions/prompt/delete_character.c\
