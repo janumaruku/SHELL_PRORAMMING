@@ -7,8 +7,10 @@
 
 #include "../../../include/shell.h"
 #include "../../../include/utils.h"
+#include "../../../include/job_control.h"
 
 int cur_process;
+job_t *_cur_process;
 
 void job_control(int signum)
 {
@@ -33,9 +35,13 @@ void set_sigaction(struct sigaction *sa)
 
 int runner(char *path, char **cmd)
 {
-    cur_process = fork();
     struct sigaction sa;
 
+    cur_process = fork();
+    _cur_process = malloc(sizeof(job_t));
+    _cur_process->num = 0;
+    _cur_process->pid = cur_process;
+    _cur_process->state = RUNNING;
     set_sigaction(&sa);
     if (cur_process == 0) {
         if (!execve(path, cmd, t_env)) {
