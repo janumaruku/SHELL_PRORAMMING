@@ -41,7 +41,9 @@ int runner(char *path, char **cmd)
     _cur_process = malloc(sizeof(job_t));
     _cur_process->num = 0;
     _cur_process->pid = cur_process;
-    _cur_process->state = RUNNING;
+    _cur_process->state = RUNG;
+    _cur_process->c_state = set_job_state(_cur_process->state);
+    _cur_process->cmd = tab_to_str(cmd);
     set_sigaction(&sa);
     if (cur_process == 0) {
         if (!execve(path, cmd, t_env)) {
@@ -51,5 +53,6 @@ int runner(char *path, char **cmd)
         }        
     }
     waitpid(cur_process, 0, WUNTRACED);
+    job_pop(_cur_process);
     return 0;
 }

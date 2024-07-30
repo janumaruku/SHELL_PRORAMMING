@@ -6,6 +6,7 @@
 */
 
 #include "../../../include/utils.h"
+#include "../../../include/job_control.h"
 
 void str_disp(void *data, void *sep, int b)
 {
@@ -33,4 +34,13 @@ int env_var_search(void *expected, void *data)
         d[my_strlen(e)] == '=')
         return 1;
     return 0;
+}
+
+void job_pop(void *data)
+{
+    job_t *d = (job_t *)data;
+
+    free(d->cmd);
+    free(d->c_state);
+    free(d);
 }

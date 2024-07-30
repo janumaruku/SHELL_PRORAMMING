@@ -68,6 +68,8 @@ char **tab_dup(char **tab);
 
 int tab_len(char **tab);
 
+char *tab_to_str(char **tab);
+
 bool my_str_isnum(char const *str);
 
 #pragma once

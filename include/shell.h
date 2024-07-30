@@ -9,6 +9,7 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include "linked_list.h"
+#include "job_control.h"
 
 extern plist_t l_env;
 
@@ -25,6 +26,8 @@ int colon_seg(char c);
 int env_var_search(void *expected, void *data);
 
 int interpretor(char **cmd);
+
+void job_pop(void *data);
 
 int main_loop(void);
 
