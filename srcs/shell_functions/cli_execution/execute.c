@@ -20,6 +20,12 @@ void job_control(int signum)
     }
     if (signum == SIGTSTP) {
         kill(cur_process, SIGSTOP);
+        job_list->jobs = push_back(job_list->jobs, _cur_process);
+        if (job_list->jobs->lenght == 1)
+            job_list->curr = job_list->jobs->begin;
+        if (job_list->jobs->lenght == 2)
+            job_list->next = job_list->jobs->end;
+        _cur_process = NULL;
         printf("\nSuspended\n");
     }
 }
@@ -53,6 +59,7 @@ int runner(char *path, char **cmd)
         }        
     }
     waitpid(cur_process, 0, WUNTRACED);
-    job_pop(_cur_process);
+    if (_cur_process)
+        job_pop(_cur_process);
     return 0;
 }
