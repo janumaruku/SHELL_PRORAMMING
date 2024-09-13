@@ -13,6 +13,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <errno.h>
+#include <math.h>
 
 int count_word(char const *str, int (*func)(char));
 
@@ -23,6 +24,8 @@ int err_putchar(char c);
 int err_putstr(char const *str);
 
 void free_2d_array(char **map);
+
+char *int_to_str(int n);
 
 int is_anum(char const c);
 
@@ -67,6 +70,8 @@ void swap_char(char *a, char *b);
 char **tab_dup(char **tab);
 
 int tab_len(char **tab);
+
+char *tab_to_str(char **tab);
 
 bool my_str_isnum(char const *str);
 
