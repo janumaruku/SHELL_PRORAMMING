@@ -10,6 +10,8 @@
 #include "../../../include/prompt.h"
 #include "../../../include/builtin.h"
 
+line_edition_t *p;
+
 // char **prompt(void)
 // {
 //     char *line = NULL;
@@ -94,12 +96,39 @@ void m_prompt(void)
     my_putstr("[janumaruku] user> ");
 }
 
+void while_prompting(int signum)
+{
+    if (signum == SIGTSTP)
+        return;
+    if (signum == SIGINT) {
+        printf("\n");
+        m_prompt();
+        free(p->cmd);
+        p->cmd = malloc(sizeof(char) * (COMMAND_MAX_LENGTH + 1));
+        p->pos = 0;
+        p->len = 0;
+        p->done = 0;
+        return;
+    }
+}
+
+void prompt_sig_handler(struct sigaction *sa)
+{
+    sa->sa_handler = while_prompting;
+    sigemptyset(&sa->sa_mask);
+    sa->sa_flags = SA_RESTART;
+    sigaction(SIGTSTP, sa, NULL);
+    sigaction(SIGINT, sa, NULL);
+}
+
 char **prompt2(void)
 {
     char c = 0;
     char **res = NULL;
-    line_edition_t *p = init_line_edition();
+    p = init_line_edition();
+    struct sigaction sa;
 
+    prompt_sig_handler(&sa);
     enable_raw_mode();
     m_prompt();
     p->cmd[0] = 0;

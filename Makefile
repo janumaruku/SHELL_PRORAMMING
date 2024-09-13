@@ -24,6 +24,7 @@ SRCS	=	srcs/linked_list/clear_list.c\
 			srcs/shell_functions/builtins/my_unsetenv.c\
 			srcs/shell_functions/cli_execution/execute.c\
 			srcs/shell_functions/cli_execution/interpretor.c\
+			srcs/shell_functions/job_control/job_control.c\
 			srcs/shell_functions/job_control/jobs_utils.c\
 			srcs/shell_functions/main_loop/main_loop.c\
 			srcs/shell_functions/Others/list_str_funcs.c\
@@ -38,6 +39,7 @@ SRCS	=	srcs/linked_list/clear_list.c\
 			srcs/utils/err_putchar.c\
 			srcs/utils/err_putstr.c\
 			srcs/utils/free_2d_array.c\
+			srcs/utils/int_to_str.c\
 			srcs/utils/is_anum.c	\
 			srcs/utils/is_char.c	\
 			srcs/utils/is_digit.c\

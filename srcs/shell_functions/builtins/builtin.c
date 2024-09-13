@@ -9,21 +9,67 @@
 #include "../../../include/linked_list.h"
 #include "../../../include/utils.h"
 #include "../../../include/builtin.h"
+#include "../../../include/job_control.h"
 
 int fg(char **cmd)
 {
+    struct sigaction sa;
+    int tmp = 0;
+    pnode_t node = NULL;
+
     if (!cmd[1]) {
-        kill(cur_process, SIGCONT);
-        waitpid(cur_process, 0, WUNTRACED);
+        node = job_list->curr;
+        _cur_process = node->data;
+    } else {
+        if (cmd[1][0] != '%') {
+            fprintf(stderr, "fg: No such job.\n");
+            return 0;
+        }
+        if (cmd[1][1] == 0 || cmd[1][1] == ' ') {
+            cmd[1] = NULL;
+            fg(cmd);
+            return 0;
+        }
+        if (!is_digit(cmd[1][1])) {
+            fprintf(stderr, "fg: No such job.\n");
+            return 0;
+        }
+        tmp = my_getnbr(&cmd[1][1]);
+        node = search_node(job_list->jobs, &tmp, job_search);
+        _cur_process = node->data;
     }
+    free(_cur_process->c_state);
+    _cur_process = set_job_state(RUNG, _cur_process);
+    set_sigaction(&sa);
+    kill(_cur_process->pid, SIGCONT);
+    print_job(_cur_process, "\n", 1);
+    waitpid(_cur_process->pid, &_cur_process->exit_status, WUNTRACED);
+    if (WIFSIGNALED(_cur_process->exit_status)) {
+        if (WTERMSIG(_cur_process->exit_status) == SIGSEGV)
+            printf("Segmentation fault");
+        if (_cur_process == job_list->curr->data) {
+            job_list->jobs = pop_element(job_list->jobs, node, job_pop);
+            job_list->curr = job_list->next;
+            job_list->next = job_list->jobs->end;
+        } else
+            job_list->jobs = pop_element(job_list->jobs, node, job_pop);
+    }
+    _cur_process = NULL;
+}
+
+int jobs(char **cmd)
+{
+    disp_list(job_list->jobs, "\n", print_job);
+    if (job_list->jobs->lenght > 0)
+        printf("\n");
 }
 
 int builtin(char **cmd)
 {
-    char *builin_cmd[7] = {"exit", "env", "setenv", "unsetenv",
-    "cd", "fg", NULL};
-    int (*func[6])(char **) = {my_exit, my_env, my_setenv, my_unsetenv,
-    my_cd, fg};
+    char *builin_cmd[8] = {"exit", "env", "setenv", "unsetenv",
+    "cd", "fg", "jobs", NULL};
+    int (*func[7])(char **) = {my_exit, my_env, my_setenv, my_unsetenv,
+    my_cd, fg, jobs};
 
     for (int i = 0; builin_cmd[i]; i++) {
         if (my_strcmp(cmd[0], builin_cmd[i]) == 0) {
@@ -33,3 +79,5 @@ int builtin(char **cmd)
     }
     return 0;
 }
+
+// [16] + Suspended                     cat

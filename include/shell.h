@@ -11,11 +11,11 @@
 #include "linked_list.h"
 #include "job_control.h"
 
+extern int exit_status;
+
 extern plist_t l_env;
 
 extern char *past_dir;
-
-extern int cur_process;
 
 extern char **t_env;
 
