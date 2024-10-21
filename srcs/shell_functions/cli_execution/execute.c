@@ -20,7 +20,7 @@ void set_sigaction(struct sigaction *sa)
     sa->sa_flags = SA_RESTART;
     sigaction(SIGTSTP, sa, NULL);
     sigaction(SIGINT, sa, NULL);
-    sigaction(SIGCHLD, sa, NULL);
+    // sigaction(SIGCHLD, sa, NULL);
 }
 
 int runner(char *path, char **cmd)
