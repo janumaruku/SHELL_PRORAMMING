@@ -53,6 +53,13 @@ int fg(char **cmd)
             job_list->next = job_list->jobs->end;
         } else
             job_list->jobs = pop_element(job_list->jobs, node, job_pop);
+    } else if (WIFEXITED(_cur_process->exit_status)) {
+        if (_cur_process == job_list->curr->data) {
+            job_list->jobs = pop_element(job_list->jobs, node, job_pop);
+            job_list->curr = job_list->next;
+            job_list->next = job_list->jobs->end;
+        } else
+            job_list->jobs = pop_element(job_list->jobs, node, job_pop);
     }
     _cur_process = NULL;
 }
