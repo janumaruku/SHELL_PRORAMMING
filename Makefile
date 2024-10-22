@@ -16,8 +16,10 @@ SRCS	=	srcs/linked_list/clear_list.c\
 			srcs/linked_list/search_node.c\
 			srcs/linked_list/sort_list.c\
 			srcs/linked_list/tab_to_list.c\
-			srcs/shell_functions/builtins/my_cd.c\
 			srcs/shell_functions/builtins/builtin.c\
+			srcs/shell_functions/builtins/fg.c\
+			srcs/shell_functions/builtins/jobs.c\
+			srcs/shell_functions/builtins/my_cd.c\
 			srcs/shell_functions/builtins/my_env.c\
 			srcs/shell_functions/builtins/my_exit.c\
 			srcs/shell_functions/builtins/my_setenv.c\

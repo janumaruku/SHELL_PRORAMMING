@@ -51,6 +51,8 @@ struct jobs_s {
     int last_id;
 };
 
+int fg(char **cmd);
+
 void free_job(jobs_t *jobs);
 
 jobs_t *init_job_list(void);
@@ -58,6 +60,8 @@ jobs_t *init_job_list(void);
 void job_control(int signum);
 
 int job_search(void *expected, void *data);
+
+int jobs(char **cmd);
 
 void print_job(void *data, void *sep, int b);
 
