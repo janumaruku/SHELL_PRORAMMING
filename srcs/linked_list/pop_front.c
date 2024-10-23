@@ -16,6 +16,7 @@ linked_list_t *pop_front(linked_list_t *list, void (*func)(void *data))
     if (list->lenght == 1) {
         list->begin = NULL;
         list->end = NULL;
+        list->cursor = NULL;
         free_node(&actuel, func);
         list->lenght -= 1;
         return list;

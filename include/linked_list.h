@@ -16,6 +16,7 @@ typedef struct node {
 typedef struct linked_list {
     node_t *begin;
     node_t *end;
+    node_t *cursor;
     int lenght;
     int last_id;
 } linked_list_t, *plist_t;

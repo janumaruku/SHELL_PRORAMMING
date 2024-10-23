@@ -25,12 +25,14 @@ linked_list_t *push_back(linked_list_t *list, void *var)
     if (is_empty_list(list)) {
         list->begin = node;
         list->end = node;
+        list->cursor = node;
         list->lenght += 1;
         return list;
     }
     list->end->next = node;
     node->prev = list->end;
     list->end = list->end->next;
+    list->cursor = list->end;
     list->lenght += 1;
     return list;
 }
