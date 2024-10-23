@@ -7,6 +7,7 @@
 
 #include "../include/linked_list.h"
 #include "../include/shell.h"
+#include "../include/builtin.h"
 #include "../include/utils.h"
 #include "../include/job_control.h"
 
@@ -88,6 +89,7 @@ int main(int argc, char *argv[], char *env[])
     t_env = tab_dup(env);
     job_list = init_job_list();
     past_dir = NULL;
+    history = new_list();
     main_loop();
     // trienode *root = create_trienode();
 

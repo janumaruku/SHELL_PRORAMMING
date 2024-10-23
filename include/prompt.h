@@ -43,7 +43,7 @@ int others(line_edition_t *p, char c);
 
 char **prompt(void);
 
-char **prompt2(void);
+char *prompt2(void);
 
 line_edition_t *up_history(line_edition_t *p);
 

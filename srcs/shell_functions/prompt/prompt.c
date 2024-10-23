@@ -121,10 +121,11 @@ void prompt_sig_handler(struct sigaction *sa)
     sigaction(SIGINT, sa, NULL);
 }
 
-char **prompt2(void)
+char *prompt2(void)
 {
     char c = 0;
-    char **res = NULL;
+    // char **res = NULL;
+    char *res = NULL;
     p = init_line_edition();
     struct sigaction sa;
 
@@ -140,7 +141,8 @@ char **prompt2(void)
                 free(p);
                 return NULL;
             }
-            res = split(p->cmd, cmd_seg);
+            // res = split(p->cmd, cmd_seg);
+            res = my_strdup(p->cmd);
             free(p->cmd);
             free(p);
             return res;
@@ -156,7 +158,8 @@ char **prompt2(void)
                     free(p);
                     return NULL;
                 }
-                res = split(p->cmd, cmd_seg);
+                // res = split(p->cmd, cmd_seg);
+                res = my_strdup(p->cmd);
                 free(p->cmd);
                 free(p);
                 return res;

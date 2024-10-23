@@ -61,6 +61,8 @@ int my_strlen(const char *str);
 
 int my_strncmp(char *s1, char *s2, int n);
 
+int number_len(int n);
+
 char **split(char const *str, int (*func)(char));
 
 char **split_colons(char *str);
