@@ -11,6 +11,7 @@
 #include "../../../include/builtin.h"
 
 line_edition_t *p;
+char *current_command;
 
 // char **prompt(void)
 // {
@@ -127,6 +128,8 @@ char *prompt2(void)
     // char **res = NULL;
     char *res = NULL;
     p = init_line_edition();
+    current_command = malloc(sizeof(char) * (COMMAND_MAX_LENGTH + 1));
+    current_command[0] = 0;
     struct sigaction sa;
 
     prompt_sig_handler(&sa);
@@ -141,7 +144,6 @@ char *prompt2(void)
                 free(p);
                 return NULL;
             }
-            // res = split(p->cmd, cmd_seg);
             res = my_strdup(p->cmd);
             free(p->cmd);
             free(p);
@@ -158,7 +160,6 @@ char *prompt2(void)
                     free(p);
                     return NULL;
                 }
-                // res = split(p->cmd, cmd_seg);
                 res = my_strdup(p->cmd);
                 free(p->cmd);
                 free(p);
