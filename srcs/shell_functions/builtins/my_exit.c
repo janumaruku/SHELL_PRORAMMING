@@ -11,6 +11,8 @@
 #include "../../../include/job_control.h"
 
 extern char *current_command;
+extern pnode_t top_reached;
+extern pnode_t buttom_reached;
 
 int my_exit(char **cmd)
 {
@@ -24,5 +26,7 @@ int my_exit(char **cmd)
     if (current_command != NULL)
         free(current_command);
     // free(current_command);
+    free_node(&top_reached, str_pop);
+    free_node(&buttom_reached, str_pop);
     exit(0);
 }

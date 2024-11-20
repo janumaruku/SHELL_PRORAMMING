@@ -12,6 +12,8 @@
 
 line_edition_t *p;
 char *current_command;
+pnode_t top_reached;
+pnode_t buttom_reached;
 
 // char **prompt(void)
 // {
@@ -132,6 +134,7 @@ char *prompt2(void)
     // current_command = 0;
     struct sigaction sa;
 
+    history->cursor = buttom_reached;
     prompt_sig_handler(&sa);
     enable_raw_mode();
     m_prompt();
@@ -185,6 +188,4 @@ char *prompt2(void)
             continue;
         }
     }
-    // if (current_command != NULL)
-    //     free(current_command);
 }
