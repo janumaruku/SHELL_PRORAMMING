@@ -21,6 +21,8 @@ int my_exit(char **cmd)
     free_2d_array(t_env);
     clear_list(&l_env, str_pop);
     clear_list(&history, del_history);
-    free(current_command);
+    if (current_command != NULL)
+        free(current_command);
+    // free(current_command);
     exit(0);
 }

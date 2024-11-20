@@ -143,11 +143,15 @@ char *prompt2(void)
             p = enter(p);
             if (!p->cmd) {
                 free(p);
+                if (current_command != NULL)
+                    free(current_command);
                 return NULL;
             }
             res = my_strdup(p->cmd);
             free(p->cmd);
             free(p);
+            if (current_command != NULL)
+                free(current_command);
             return res;
         }
         if (c == 27) {
@@ -159,11 +163,15 @@ char *prompt2(void)
             if (p->done) {
                 if (!p->cmd) {
                     free(p);
+                    if (current_command != NULL)
+                        free(current_command);
                     return NULL;
                 }
                 res = my_strdup(p->cmd);
                 free(p->cmd);
                 free(p);
+                if (current_command != NULL)
+                    free(current_command);
                 return res;
             }
             continue;
@@ -177,4 +185,6 @@ char *prompt2(void)
             continue;
         }
     }
+    // if (current_command != NULL)
+    //     free(current_command);
 }
