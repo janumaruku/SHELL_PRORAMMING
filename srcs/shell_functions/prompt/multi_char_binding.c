@@ -14,57 +14,21 @@ extern char *current_command;
 
 line_edition_t *up_history(line_edition_t *p)
 {
-    // my_putstr("I'm here.\n");
-    if (history->lenght == 0) {
-        printf("The list is empty.\n");
+    if (history->lenght == 0)
         return p;
-    }
-    if (history->cursor == NULL) {
-        if (history->cursor == history->begin->prev) {
-            printf("The cursor is at top.\n");
-            return p;
-        }
-        history->cursor = history->end;
-    }
-    if (history->cursor == history->end) {
-        printf("The cursor is on last node.\n");
+    if (history->cursor == history->end)
         my_strcpy(current_command, p->cmd);
-    }
+    kill_whole_line(p);
     my_strcpy(p->cmd, ((history_t *)(history->cursor->data))->command);
     p->len = my_strlen(p->cmd);
     p->pos = p->len;
-    history->cursor = history->cursor->prev;
-    kill_whole_line(p);
-    printf("%s==>", p->cmd);
-    // fflush(stdout);
+    printf("%s", p->cmd);
+    fflush(stdout);
     return p;
 }
 
 line_edition_t *down_history(line_edition_t *p)
 {
-    // my_putstr("I'm here.\n");
-    if (history->lenght == 0)
-        return p;
-    if (history->cursor == NULL) {
-        if (history->cursor == history->end->next) {
-            if (my_strcmp(p->cmd, current_command) == 0)
-                return p;
-            my_strcpy(p->cmd, current_command);
-            p->len = my_strlen(p->cmd);
-            p->pos = p->len;
-            return p;
-        }
-        history->cursor = history->begin;
-    }
-    // if (history->cursor == history->end)
-    //     my_strcpy(current_command, p->cmd);
-    my_strcpy(p->cmd, ((history_t *)(history->cursor->data))->command);
-    p->len = my_strlen(p->cmd);
-    p->pos = p->len;
-    history->cursor = history->cursor->next;
-    kill_whole_line(p);
-    printf("%s", p->cmd);
-    fflush(stdout);
     return p;
 }
 
@@ -95,11 +59,27 @@ int multi_char_binding(line_edition_t *p)
 
     getchar();
     c = getchar();
-    for (int i = 0; bindkey[i]; i++) {
-        if (c == bindkey[i]) {
-            p = func[i](p);
-            return 1;
-        }
+    // for (int i = 0; bindkey[i]; i++) {
+    //     if (c == bindkey[i]) {
+    //         p = func[i](p);
+    //         return 1;
+    //     }
+    // }
+    if (c == 'A') {
+        p = up_history(p);
+        return 1;
+    }
+    if (c == 'B') {
+        p = down_history(p);
+        return 1;
+    }
+    if (c == 'C') {
+        p = forward_char(p);
+        return 1;
+    }
+    if (c == 'D') {
+        p = backward_char(p);
+        return 1;
     }
     return 0;
 }

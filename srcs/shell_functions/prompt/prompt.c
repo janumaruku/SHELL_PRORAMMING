@@ -129,13 +129,14 @@ char *prompt2(void)
     char *res = NULL;
     p = init_line_edition();
     current_command = malloc(sizeof(char) * (COMMAND_MAX_LENGTH + 1));
-    current_command[0] = 0;
+    // current_command = 0;
     struct sigaction sa;
 
     prompt_sig_handler(&sa);
     enable_raw_mode();
     m_prompt();
     p->cmd[0] = 0;
+    // history->cursor = history->end;
     while (1) {
         c = getchar();
         if (c == '\n') {
