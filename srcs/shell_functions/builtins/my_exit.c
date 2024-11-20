@@ -10,6 +10,8 @@
 #include "../../../include/utils.h"
 #include "../../../include/job_control.h"
 
+extern char *current_command;
+
 int my_exit(char **cmd)
 {
     my_putstr("exit\n");
@@ -19,5 +21,6 @@ int my_exit(char **cmd)
     free_2d_array(t_env);
     clear_list(&l_env, str_pop);
     clear_list(&history, del_history);
+    free(current_command);
     exit(0);
 }
