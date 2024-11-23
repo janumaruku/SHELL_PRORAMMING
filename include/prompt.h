@@ -35,6 +35,8 @@ line_edition_t *forspace(line_edition_t *p);
 
 line_edition_t *forward_char(line_edition_t *p);
 
+line_edition_t *kill_whole_line(line_edition_t *p);
+
 void m_prompt(void);
 
 int multi_char_binding(line_edition_t *p);

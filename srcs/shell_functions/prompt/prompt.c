@@ -11,6 +11,9 @@
 #include "../../../include/builtin.h"
 
 line_edition_t *p;
+char *current_command;
+pnode_t top_reached;
+pnode_t buttom_reached;
 
 // char **prompt(void)
 // {
@@ -127,24 +130,31 @@ char *prompt2(void)
     // char **res = NULL;
     char *res = NULL;
     p = init_line_edition();
+    current_command = malloc(sizeof(char) * (COMMAND_MAX_LENGTH + 1));
+    // current_command = 0;
     struct sigaction sa;
 
+    history->cursor = buttom_reached;
     prompt_sig_handler(&sa);
     enable_raw_mode();
     m_prompt();
     p->cmd[0] = 0;
+    // history->cursor = history->end;
     while (1) {
         c = getchar();
         if (c == '\n') {
             p = enter(p);
             if (!p->cmd) {
                 free(p);
+                if (current_command != NULL)
+                    free(current_command);
                 return NULL;
             }
-            // res = split(p->cmd, cmd_seg);
             res = my_strdup(p->cmd);
             free(p->cmd);
             free(p);
+            if (current_command != NULL)
+                free(current_command);
             return res;
         }
         if (c == 27) {
@@ -156,12 +166,15 @@ char *prompt2(void)
             if (p->done) {
                 if (!p->cmd) {
                     free(p);
+                    if (current_command != NULL)
+                        free(current_command);
                     return NULL;
                 }
-                // res = split(p->cmd, cmd_seg);
                 res = my_strdup(p->cmd);
                 free(p->cmd);
                 free(p);
+                if (current_command != NULL)
+                    free(current_command);
                 return res;
             }
             continue;

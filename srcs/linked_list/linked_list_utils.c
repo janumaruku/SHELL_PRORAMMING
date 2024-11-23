@@ -13,6 +13,7 @@ linked_list_t *new_list(void)
 
     new->begin = NULL;
     new->end = NULL;
+    new->cursor = NULL;
     new->lenght = 0;
     return new;
 }

@@ -39,6 +39,7 @@ void print_history(void *data, void *separator, int is_seperator)
     int strlen = printf("%d:%d", d->time->tm_hour, d->time->tm_min);
     printf("%*s%s", 5 - strlen + 3, "", d->command);
     if (is_seperator)
+        printf("%s", s);
     fflush(stdout);
 }
 

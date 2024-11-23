@@ -11,11 +11,12 @@
 #include "../include/utils.h"
 #include "../include/job_control.h"
 
-
 plist_t l_env;
 char **t_env;
 char *past_dir;
 jobs_t *job_list;
+extern pnode_t top_reached;
+extern pnode_t buttom_reached;
 
 // #include <stdbool.h>
 // #include <stdio.h>
@@ -90,6 +91,8 @@ int main(int argc, char *argv[], char *env[])
     job_list = init_job_list();
     past_dir = NULL;
     history = new_list();
+    top_reached = fill_node(my_strdup("top"));
+    buttom_reached = fill_node(my_strdup("buttom"));
     main_loop();
     // trienode *root = create_trienode();
 
