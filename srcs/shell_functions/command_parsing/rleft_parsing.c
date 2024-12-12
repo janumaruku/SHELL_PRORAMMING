@@ -33,5 +33,7 @@ tree_t *rleft_parsing(char *str)
     }
     if (a[2] == 0)
         return pipe_parsing(str);
+    free(command[0]);
+    free(command);
     return tr;
 }

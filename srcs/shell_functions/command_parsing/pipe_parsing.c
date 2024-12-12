@@ -26,12 +26,12 @@ tree_t *pipe_parsing(char *str)
             a[2] = 1;
             str[i] = 0;
             tr = join_tree(pipe_parsing(str),
-            new_tree(&str[i + 2]), my_strdup("||"));
+            new_tree(my_strdup(&str[i + 2])), my_strdup("|"));
         }
         a[0] = str[i] == '(' ? a[0] - 1 : a[0];
         // a[1] = str[i] == '`' && a[1] == 1 ? a[1] - 1 : a[1];
     }
     if (a[2] == 0)
-        return new_tree(str);
+        return new_tree(my_strdup(str));
     return tr;
 }

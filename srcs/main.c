@@ -11,6 +11,7 @@
 #include "../include/utils.h"
 #include "../include/job_control.h"
 #include "../include/binary_tree.h"
+#include "../include/command_parsing.h"
 
 plist_t l_env;
 char **t_env;
@@ -96,7 +97,7 @@ void func2(void *data)
 {
     char *d = (char *)data;
 
-    my_putstr(d); my_putchar('\n');
+    my_putstr(d);
 }
 
 int main(int argc, char *argv[], char *env[])
@@ -118,11 +119,11 @@ int main(int argc, char *argv[], char *env[])
     // insert_word(&root, "flow");
     // insert_word(&root, "flight");
     // print_trie(root);
-    char *str = my_strdup("ls -l > file -a");
+    char *str = my_strdup("tree || ls > data && cat data || cat res && clear");
     printf("%s\n\n", str);
-    tree_t *tr = tree_from_cmd(str);
+    tree_t *tr = semicolon_parsing(str);
     print_tree_prefix(tr, func2); my_putchar('\n');
-    // clean_tree(tr, func1);
+    clean_tree(tr, func1);
     free(str);
     return 0;
 }

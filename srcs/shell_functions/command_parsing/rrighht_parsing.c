@@ -29,8 +29,8 @@ char **operands(char *str, char sign)
         } else
             result[1] = my_strdup(sign == '>' ? ">" : "<");
         i += 1;
-        for (; str[i] == ' ' || !str[i]; i++);
-        for (j = i; str[j] != ' ' || !str[j]; j++);
+        for (; str[i] == ' '; i++);
+        for (j = i; str[j] != ' ' && str[j]; j++);
         str[j] = 0;
         result[2] = my_strdup(&str[i]);
         result[0] = my_strdup(&str[j + 1]);
@@ -44,8 +44,8 @@ char **operands(char *str, char sign)
         } else
             result[1] = my_strdup(sign == '>' ? ">" : "<");
         j +=1;
-        for (; str[j] == ' ' || !str[j]; j++);
-        for (k = j; str[k] != ' ' || !str[k]; k++);
+        for (; str[j] == ' '; j++);
+        for (k = j; str[k] != ' ' && str[k] != 0; k++);
         str[k] = 0;
         result[2] = my_strdup(&str[j]);
         result[0] = malloc(sizeof(char) * (len + 1));
@@ -81,5 +81,7 @@ tree_t *rright_parsing(char *str)
     }
     if (a[2] == 0)
         return rleft_parsing(str);
+    free(command[0]);
+    free(command);
     return tr;
 }
