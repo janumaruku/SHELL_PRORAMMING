@@ -10,6 +10,7 @@
 #include "../include/builtin.h"
 #include "../include/utils.h"
 #include "../include/job_control.h"
+#include "../include/binary_tree.h"
 
 plist_t l_env;
 char **t_env;
@@ -84,16 +85,30 @@ extern pnode_t buttom_reached;
     
 // }
 
+void func1(void *data)
+{
+    char *d = (char *)data;
+
+    free(d);
+}
+
+void func2(void *data)
+{
+    char *d = (char *)data;
+
+    my_putstr(d); my_putchar('\n');
+}
+
 int main(int argc, char *argv[], char *env[])
 {
-    l_env = tab_to_list(env);
-    t_env = tab_dup(env);
-    job_list = init_job_list();
-    past_dir = NULL;
-    history = new_list();
-    top_reached = fill_node(my_strdup("top"));
-    buttom_reached = fill_node(my_strdup("buttom"));
-    main_loop();
+    // l_env = tab_to_list(env);
+    // t_env = tab_dup(env);
+    // job_list = init_job_list();
+    // past_dir = NULL;
+    // history = new_list();
+    // top_reached = fill_node(my_strdup("top"));
+    // buttom_reached = fill_node(my_strdup("buttom"));
+    // main_loop();
     // trienode *root = create_trienode();
 
     // insert_word(&root, "macaco");
@@ -103,7 +118,13 @@ int main(int argc, char *argv[], char *env[])
     // insert_word(&root, "flow");
     // insert_word(&root, "flight");
     // print_trie(root);
-    // return 0;
+    char *str = my_strdup("ls -l > file -a");
+    printf("%s\n\n", str);
+    tree_t *tr = tree_from_cmd(str);
+    print_tree_prefix(tr, func2); my_putchar('\n');
+    // clean_tree(tr, func1);
+    free(str);
+    return 0;
 }
 
 // FRA1CT20247019486
