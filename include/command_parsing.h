@@ -13,6 +13,8 @@ char **operands(char *str, char sign);
 
 tree_t *or_parsing(char *str);
 
+tree_t *parenthesis_parsing(char *str);
+
 tree_t *pipe_parsing(char *str);
 
 tree_t *rleft_parsing(char *str);

@@ -119,7 +119,7 @@ int main(int argc, char *argv[], char *env[])
     // insert_word(&root, "flow");
     // insert_word(&root, "flight");
     // print_trie(root);
-    char *str = my_strdup("ls ; ls -l | cat > data ; cat < test -l");
+    char *str = my_strdup("(echo \"DATE: \" ; date) > file");
     printf("%s\n\n", str);
     tree_t *tr = semicolon_parsing(str);
     print_tree_prefix(tr, func2); my_putchar('\n');

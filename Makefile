@@ -23,6 +23,7 @@ SRCS	=	srcs/binary_tree_functions/clean_tree.c\
 			srcs/linked_list/tab_to_list.c\
 			srcs/shell_functions/command_parsing/and_parsing.c\
 			srcs/shell_functions/command_parsing/or_parsing.c\
+			srcs/shell_functions/command_parsing/parenthesis_parsing.c\
 			srcs/shell_functions/command_parsing/pipe_parsing.c\
 			srcs/shell_functions/command_parsing/rleft_parsing.c\
 			srcs/shell_functions/command_parsing/rrighht_parsing.c\
