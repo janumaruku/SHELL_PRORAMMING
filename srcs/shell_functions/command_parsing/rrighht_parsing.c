@@ -46,11 +46,14 @@ char **operands(char *str, char sign)
         j +=1;
         for (; str[j] == ' '; j++);
         for (k = j; str[k] != ' ' && str[k] != 0; k++);
-        str[k] = 0;
+        if (str[k] != 0) {
+            str[k] = 0;
+            k += 1;
+        } else
+            str[k] = 0;
         result[2] = my_strdup(&str[j]);
         result[0] = malloc(sizeof(char) * (len + 1));
         my_strcpy(result[0], str);
-        k += 1;
         for (i = my_strlen(result[0]); str[k]; i++) {
             result[0][i] = str[k];
             k +=1;
