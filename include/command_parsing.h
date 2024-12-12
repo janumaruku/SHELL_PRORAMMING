@@ -5,7 +5,7 @@
 ** Command parsing functions prototype
 */
 
-#include"../../../include/binary_tree.h"
+#include"binary_tree.h"
 
 tree_t *and_parsing(char *str);
 

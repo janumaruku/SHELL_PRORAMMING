@@ -11,6 +11,7 @@
 #include "../../../include/prompt.h"
 #include "../../../include/builtin.h"
 #include"../../../include/binary_tree.h"
+#include"../../../include/command_parsing.h"
 
 tree_t *pipe_parsing(char *str)
 {
