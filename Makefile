@@ -5,7 +5,12 @@
 ## The project Makefile
 ##
 
-SRCS	=	srcs/linked_list/clear_list.c\
+SRCS	=	srcs/binary_tree_functions/clean_tree.c\
+			srcs/binary_tree_functions/create_tree.c\
+			srcs/binary_tree_functions/join_tree.c\
+			srcs/binary_tree_functions/print_tree.c\
+			srcs/binary_tree_functions/tree_from_cmd.c\
+			srcs/linked_list/clear_list.c\
 			srcs/linked_list/disp_list.c\
 			srcs/linked_list/free_node.c\
 			srcs/linked_list/linked_list_utils.c\
@@ -16,6 +21,12 @@ SRCS	=	srcs/linked_list/clear_list.c\
 			srcs/linked_list/search_node.c\
 			srcs/linked_list/sort_list.c\
 			srcs/linked_list/tab_to_list.c\
+			srcs/shell_functions/command_parsing/and_parsing.c\
+			srcs/shell_functions/command_parsing/or_parsing.c\
+			srcs/shell_functions/command_parsing/pipe_parsing.c\
+			srcs/shell_functions/command_parsing/rleft_parsing.c\
+			srcs/shell_functions/command_parsing/rrighht_parsing.c\
+			srcs/shell_functions/command_parsing/semicolon_parsing.c\
 			srcs/shell_functions/builtins/builtin.c\
 			srcs/shell_functions/builtins/fg.c\
 			srcs/shell_functions/builtins/history.c\
