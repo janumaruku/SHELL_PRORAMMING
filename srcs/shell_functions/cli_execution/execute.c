@@ -43,6 +43,7 @@ int runner(char *path, char **cmd)
         }        
     }
     waitpid(_cur_process->pid, &_cur_process->exit_status, WUNTRACED);
+    exit_status = _cur_process->exit_status;
     if (_cur_process->num == 0)
         job_pop(_cur_process);
     _cur_process = NULL;

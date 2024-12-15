@@ -44,6 +44,7 @@ int fg(char **cmd)
     kill(_cur_process->pid, SIGCONT);
     print_job(_cur_process, "\n", 1);
     waitpid(_cur_process->pid, &_cur_process->exit_status, WUNTRACED);
+    exit_status = _cur_process->exit_status;
     if (WIFSIGNALED(_cur_process->exit_status)) {
         if (WTERMSIG(_cur_process->exit_status) == SIGSEGV)
             printf("Segmentation fault");
