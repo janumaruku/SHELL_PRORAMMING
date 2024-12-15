@@ -59,6 +59,7 @@ int interpretor(char **cmd)
         return 0;
     }
     fprintf(stderr, "%s: command not found.\n", cmd[0]);
+    exit_status = 1;
     free(var);
     free(path);
     return 0;
