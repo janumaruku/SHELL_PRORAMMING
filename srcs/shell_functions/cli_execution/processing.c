@@ -23,6 +23,12 @@ int processing(tree_t *tree)
         processing(tree->tright);
         return 0;
     }
+    if (my_strcmp(tree->data, "||") == 0) {
+        processing(tree->tleft);
+        if (exit_status != 0)
+            processing(tree->tright);
+        return 0;
+    }
     cmd = split(tree->data, cmd_seg);
     interpretor(cmd);
     free_2d_array(cmd);
