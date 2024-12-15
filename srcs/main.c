@@ -86,12 +86,12 @@ extern pnode_t buttom_reached;
     
 // }
 
-void func1(void *data)
-{
-    char *d = (char *)data;
+// void func1(void *data)
+// {
+//     char *d = (char *)data;
 
-    free(d);
-}
+//     free(d);
+// }
 
 void func2(void *data)
 {
@@ -102,14 +102,14 @@ void func2(void *data)
 
 int main(int argc, char *argv[], char *env[])
 {
-    // l_env = tab_to_list(env);
-    // t_env = tab_dup(env);
-    // job_list = init_job_list();
-    // past_dir = NULL;
-    // history = new_list();
-    // top_reached = fill_node(my_strdup("top"));
-    // buttom_reached = fill_node(my_strdup("buttom"));
-    // main_loop();
+    l_env = tab_to_list(env);
+    t_env = tab_dup(env);
+    job_list = init_job_list();
+    past_dir = NULL;
+    history = new_list();
+    top_reached = fill_node(my_strdup("top"));
+    buttom_reached = fill_node(my_strdup("buttom"));
+    main_loop();
     // trienode *root = create_trienode();
 
     // insert_word(&root, "macaco");
@@ -119,12 +119,12 @@ int main(int argc, char *argv[], char *env[])
     // insert_word(&root, "flow");
     // insert_word(&root, "flight");
     // print_trie(root);
-    char *str = my_strdup("(echo \"DATE: \" ; date) > file");
-    printf("%s\n\n", str);
-    tree_t *tr = semicolon_parsing(str);
-    print_tree_prefix(tr, func2); my_putchar('\n');
-    clean_tree(tr, func1);
-    free(str);
+    // char *str = my_strdup("(echo \"DATE: \" ; date) > file");
+    // printf("%s\n\n", str);
+    // tree_t *tr = semicolon_parsing(str);
+    // print_tree_prefix(tr, func2); my_putchar('\n');
+    // clean_tree(tr, func1);
+    // free(str);
     return 0;
 }
 
