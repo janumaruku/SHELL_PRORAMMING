@@ -36,7 +36,7 @@ int main_loop(void)
         cmd = split(cli, cmd_seg);
         history = push_back(history, new_command(my_strdup(cli)));
         if (builtin(cmd)) {
-            // free(cli);
+            free(cli);
             free_2d_array(cmd);
             continue;
         }
