@@ -33,18 +33,19 @@ int main_loop(void)
         if (!cli)
             continue;
         // cmd = split(cli, cmd_seg);
-        cmd = split(cli, cmd_seg);
+        // cmd = split(cli, cmd_seg);
         history = push_back(history, new_command(my_strdup(cli)));
-        if (builtin(cmd)) {
-            free(cli);
-            free_2d_array(cmd);
-            continue;
-        }
+        // if (builtin(cmd)) {
+        //     free(cli);
+        //     free_2d_array(cmd);
+        //     continue;
+        // }
         tree = semicolon_parsing(cli);
         processing(tree);
         // interpretor(cmd);
         free(cli);
         clean_tree(tree, func1);
-        free_2d_array(cmd);
+        // free_2d_array(cmd);
     }
+    return 0;
 }

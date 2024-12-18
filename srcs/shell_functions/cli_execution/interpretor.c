@@ -8,6 +8,7 @@
 #include "../../../include/shell.h"
 #include "../../../include/utils.h"
 #include "../../../include/linked_list.h"
+#include "../../../include/builtin.h"
 
 char *my_getenv(char *varname)
 {
@@ -46,6 +47,16 @@ int interpretor(char **cmd)
 {
     char *var = my_getenv("PATH");
     char *path = find_path(var, cmd[0]);
+    
+    if (builtin(cmd)) {
+        // free(cli);
+        // free_2d_array(cmd);
+        free(var);
+        free(path);
+        exit_status = 0;
+        return 0;
+        // continue;
+    }
     if (access(cmd[0], X_OK) == 0) {
         runner(cmd[0], cmd);
         free(var);
