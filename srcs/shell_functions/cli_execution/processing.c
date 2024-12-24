@@ -76,6 +76,37 @@ int processing(tree_t *tree)
         waitpid(pid, NULL, WUNTRACED);
         return 0;
     }
+    if (my_strcmp(tree->data, "<") == 0 || my_strcmp(tree->data, "<<") == 0) {
+        if (my_strcmp(tree->data, "<") == 0) {
+            fd = open(tree->tright->data, O_RDONLY);
+            if (fd < 0) {
+                my_perror(tree->tright->data);
+                return 0;
+            }
+            pid = fork();
+            if (pid == 0) {
+                dup2(fd, STDIN_FILENO);
+                close(fd);
+                processing(tree->tleft);
+                free(past_dir);
+                free_job(job_list);
+                // // free_2d_array(cmd);
+                free_2d_array(t_env);
+                clear_list(&l_env, str_pop);
+                clear_list(&history, del_history);
+                // if (current_command != NULL)
+                //     free(current_command);
+                // // free(current_command);
+                free_node(&top_reached, str_pop);
+                free_node(&buttom_reached, str_pop);
+                clean_tree(tree, func3);
+                exit(0);
+            }
+            waitpid(pid, NULL, WUNTRACED);
+        }
+        close(fd);
+        return 0;
+    }
     cmd = split(tree->data, cmd_seg);
     interpretor(cmd);
     free_2d_array(cmd);
