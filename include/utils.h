@@ -51,6 +51,8 @@ int my_putstr(char const *str);
 
 char *my_strcat(char *dest, char const *src);
 
+char *my_strcat2(char *str1, char const *str2);
+
 int my_strcmp(char *s1, char *s2);
 
 char *my_strcpy(char *dest, char const *src);

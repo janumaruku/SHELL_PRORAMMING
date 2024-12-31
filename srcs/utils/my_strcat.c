@@ -19,3 +19,21 @@ char *my_strcat(char *dest, char const *src)
     dest[k] = '\0';
     return dest;
 }
+
+char *my_strcat2(char *str1, char const *str2)
+{
+    int k = my_strlen(str1) + my_strlen(str2) + 1;
+    char *result = malloc(sizeof(char) * k);
+    int i = 0;
+    int j = 0;
+
+    for (; str1[i]; i++) {
+        result[i] = str1[i];
+    }
+    for (; str2[j]; j++) {
+        result[i] = str2[j];
+        i++;
+    }
+    result[i] = '\0';
+    return result;
+}

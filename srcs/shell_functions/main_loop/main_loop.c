@@ -13,6 +13,9 @@
 #include "../../../include/binary_tree.h"
 #include "../../../include/command_parsing.h"
 
+char *cli;
+tree_t *command_tree;
+
 void func1(void *data)
 {
     char *d = (char *)data;
@@ -22,30 +25,21 @@ void func1(void *data)
 
 int main_loop(void)
 {
-    char *cli = NULL;
     char **cmd = NULL;
-    tree_t *tree = NULL;
-    // char *cli = NULL;
 
+    command_tree = NULL;
+    cli = NULL;
     while (1) {
         cli = prompt2();
-        // disp_2d_array(cmd);
         if (!cli)
             continue;
-        // cmd = split(cli, cmd_seg);
-        // cmd = split(cli, cmd_seg);
         history = push_back(history, new_command(my_strdup(cli)));
-        // if (builtin(cmd)) {
-        //     free(cli);
-        //     free_2d_array(cmd);
-        //     continue;
-        // }
-        tree = semicolon_parsing(cli);
-        processing(tree);
-        // interpretor(cmd);
+        command_tree = semicolon_parsing(cli);
+        processing(command_tree);
         free(cli);
-        clean_tree(tree, func1);
-        // free_2d_array(cmd);
+        cli = NULL;
+        clean_tree(command_tree, str_pop);
+        command_tree = NULL;
     }
     return 0;
 }

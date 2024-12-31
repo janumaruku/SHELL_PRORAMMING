@@ -22,7 +22,7 @@ tree_t *pipe_parsing(char *str)
     for (; i >= 0; i--) {
         a[0] = str[i] == ')' ? a[0] + 1 : a[0];
         // a[1] = str[i] == '`' && a[1] == 0 ? a[1] + 1 : a[1];
-        if (my_strncmp("||", &str[i] ,2) == 0 && a[0] == 0 && a[1] == 0) {
+        if (my_strncmp("|", &str[i] ,1) == 0 && a[0] == 0 && a[1] == 0) {
             a[2] = 1;
             str[i] = 0;
             tr = join_tree(pipe_parsing(str),

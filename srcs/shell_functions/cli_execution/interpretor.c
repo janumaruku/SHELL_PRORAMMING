@@ -45,18 +45,16 @@ char *find_path(char *var, char *cmd)
 
 int interpretor(char **cmd)
 {
-    char *var = my_getenv("PATH");
-    char *path = find_path(var, cmd[0]);
+    char *var = NULL;
+    char *path = NULL;
     
     if (builtin(cmd)) {
-        // free(cli);
-        // free_2d_array(cmd);
-        free(var);
         free(path);
         exit_status = 0;
         return 0;
-        // continue;
     }
+    var = my_getenv("PATH");
+    path = find_path(var, cmd[0]);
     if (access(cmd[0], X_OK) == 0) {
         runner(cmd[0], cmd);
         free(var);

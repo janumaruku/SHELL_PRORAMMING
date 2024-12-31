@@ -8,3 +8,4 @@ file
 file2
 filename
 srcs/binary_tree_functions/tree_from_cmd.c
+prog.c
