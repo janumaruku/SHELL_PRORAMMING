@@ -25,6 +25,7 @@ int my_exit(char **cmd)
     free_2d_array(cmd);
     free_2d_array(t_env);
     clear_list(&l_env, str_pop);
+    clear_list(&l_shell_var, str_pop);
     clear_list(&history, del_history);
     if (cli)
         free(cli);

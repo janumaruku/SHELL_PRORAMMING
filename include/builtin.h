@@ -37,4 +37,6 @@ int set_cmd(char **cmd);
 
 extern plist_t history;
 
+extern plist_t l_shell_var;
+
 #pragma once
