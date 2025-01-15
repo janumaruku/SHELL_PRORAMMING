@@ -15,6 +15,8 @@
 #include <errno.h>
 #include <math.h>
 
+#define mem_free(p)             (p) = mem_clean(p)
+
 int count_word(char const *str, int (*func)(char));
 
 void disp_2d_array(char **tab);
@@ -38,6 +40,8 @@ int is_digit(char c);
 int is_empty_line(char *str);
 
 char *jm_copy(char *dest, char const *src, int (*func)(char));
+
+void *mem_clean(void *p);
 
 int my_getnbr(char const *str);
 
