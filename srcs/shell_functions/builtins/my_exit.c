@@ -18,7 +18,8 @@ extern tree_t *command_tree;
 
 int my_exit(char **cmd)
 {
-    my_putstr("exit\n");
+    if (isatty(0))
+        my_putstr("exit\n");
     free(past_dir);
     free_job(job_list);
     free_2d_array(cmd);
