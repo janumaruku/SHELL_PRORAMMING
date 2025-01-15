@@ -14,6 +14,7 @@
 #include "../include/command_parsing.h"
 
 plist_t l_env;
+plist_t l_shell_var;
 char **t_env;
 char *past_dir;
 jobs_t *job_list;
@@ -103,6 +104,7 @@ void func2(void *data)
 int main(int argc, char *argv[], char *env[])
 {
     l_env = tab_to_list(env);
+    l_shell_var = new_list();
     t_env = tab_dup(env);
     job_list = init_job_list();
     past_dir = NULL;
@@ -111,7 +113,6 @@ int main(int argc, char *argv[], char *env[])
     buttom_reached = fill_node(my_strdup("buttom"));
     main_loop();
     // trienode *root = create_trienode();
-
     // insert_word(&root, "macaco");
     // insert_word(&root, "macaroon");
     // insert_word(&root, "machine");

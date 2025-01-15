@@ -33,6 +33,8 @@ history_t *new_command(char *command);
 
 void print_history(void *data, void *separator, int is_seperator);
 
+int set_cmd(char **cmd);
+
 extern plist_t history;
 
 #pragma once

@@ -37,6 +37,7 @@ SRCS	=	srcs/binary_tree_functions/clean_tree.c\
 			srcs/shell_functions/builtins/my_exit.c\
 			srcs/shell_functions/builtins/my_setenv.c\
 			srcs/shell_functions/builtins/my_unsetenv.c\
+			srcs/shell_functions/builtins/set.c\
 			srcs/shell_functions/cli_execution/execute.c\
 			srcs/shell_functions/cli_execution/interpretor.c\
 			srcs/shell_functions/cli_execution/processing.c\

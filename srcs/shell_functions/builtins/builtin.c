@@ -13,10 +13,10 @@
 
 int builtin(char **cmd)
 {
-    char *builin_cmd[9] = {"exit", "env", "setenv", "unsetenv",
-    "cd", "fg", "jobs", "history", NULL};
-    int (*func[8])(char **) = {my_exit, my_env, my_setenv, my_unsetenv,
-    my_cd, fg, jobs, history_cmd};
+    char *builin_cmd[10] = {"exit", "env", "setenv", "unsetenv",
+    "cd", "fg", "jobs", "history", "set", NULL};
+    int (*func[9])(char **) = {my_exit, my_env, my_setenv, my_unsetenv,
+    my_cd, fg, jobs, history_cmd, set_cmd};
 
     for (int i = 0; builin_cmd[i]; i++) {
         if (my_strcmp(cmd[0], builin_cmd[i]) == 0) {
