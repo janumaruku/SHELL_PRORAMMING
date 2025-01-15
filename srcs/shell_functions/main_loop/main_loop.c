@@ -20,7 +20,7 @@ void func1(void *data)
 {
     char *d = (char *)data;
 
-    free(d);
+    mem_free(d);
 }
 
 int ctrl_d(int g, char *line)
@@ -31,7 +31,7 @@ int ctrl_d(int g, char *line)
     cmd[0] = my_strdup("exit");
     cmd[1] = 0;
     if (g == -1) {
-        free(line);
+        mem_free(line);
         my_exit(cmd);
     }
     free_2d_array(cmd);
@@ -52,7 +52,7 @@ char *esssai(void)
     g = getline(&line, &k, stdin);
     g = ctrl_d(g, line);
     if (g == 1) {
-        free(line);
+        mem_free(line);
         return NULL;
     }
     line[g - 1] = '\0';
@@ -75,7 +75,7 @@ int main_loop(void)
         command_tree = semicolon_parsing(cli);
         processing(command_tree);
         history = push_back(history, new_command(my_strdup(cli)));
-        free(cli);
+        mem_free(cli);
         cli = NULL;
         clean_tree(command_tree, str_pop);
         command_tree = NULL;

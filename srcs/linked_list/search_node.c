@@ -13,7 +13,7 @@ node_t *search_node(linked_list_t *li, void *name,
 {
     node_t *tmp = NULL;
 
-    if (is_empty_list(li))
+    if (li == NULL || is_empty_list(li))
         return NULL;
     if (func(name, li->begin->data))
         return li->begin;

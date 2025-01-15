@@ -22,7 +22,7 @@ linked_list_t *push_back(linked_list_t *list, void *var)
 {
     node_t *node = fill_node(var);
 
-    if (is_empty_list(list)) {
+    if (list == NULL || is_empty_list(list)) {
         list->begin = node;
         list->end = node;
         list->cursor = node;
@@ -41,7 +41,7 @@ linked_list_t *push_front(linked_list_t *list, void *var)
 {
     node_t *node = fill_node(var);
 
-    if (is_empty_list(list)) {
+    if (list == NULL || is_empty_list(list)) {
         list->begin = node;
         list->end = node;
         list->lenght += 1;

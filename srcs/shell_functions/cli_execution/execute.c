@@ -40,7 +40,7 @@ int runner(char *path, char **cmd)
             perror(cmd[0]);
             free_2d_array(t_env);
             clear_list(&l_env, str_pop);
-        }        
+        }
     }
     waitpid(_cur_process->pid, &_cur_process->exit_status, WUNTRACED);
     exit_status = _cur_process->exit_status;

@@ -13,7 +13,7 @@ void disp_list(linked_list_t *list, void *sep,
 {
     node_t *actuel = list->begin;
 
-    if (is_empty_list(list))
+    if (list == NULL || is_empty_list(list))
         return;
     while (actuel->next != NULL) {
         func(actuel->data, sep, 1);

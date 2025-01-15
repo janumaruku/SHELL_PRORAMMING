@@ -57,11 +57,12 @@ SRCS	=	srcs/binary_tree_functions/clean_tree.c\
 			srcs/utils/err_putstr.c\
 			srcs/utils/free_2d_array.c\
 			srcs/utils/int_to_str.c\
-			srcs/utils/is_anum.c	\
-			srcs/utils/is_char.c	\
+			srcs/utils/is_anum.c\
+			srcs/utils/is_char.c\
 			srcs/utils/is_digit.c\
 			srcs/utils/is_empty_line.c\
-			srcs/utils/jm_copy.c	\
+			srcs/utils/jm_copy.c\
+			srcs/utils/mem.c\
 			srcs/utils/my_getnbr.c\
 			srcs/utils/my_perror.c\
 			srcs/utils/my_putchar.c\

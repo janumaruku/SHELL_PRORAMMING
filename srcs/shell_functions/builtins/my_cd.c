@@ -25,12 +25,12 @@ int proccess_cd(char **cmd, char *dir)
 
     if (chdir(dir) != 0) {
         perror(cmd[1]);
-        free(str);
+        mem_free(str);
         return 1;
     } else if (!past_dir)
         past_dir = str;
     else {
-        free(past_dir);
+        mem_free(past_dir);
         past_dir = str;
     }
     return 1;
@@ -67,7 +67,7 @@ int my_cd(char **cmd)
         (tab_len(cmd) == 2 && my_strcmp("~/", cmd[1]) == 0)) {
         str = my_getenv("HOME");
         proccess_cd(cmd, str);
-        free(str);
+        mem_free(str);
         return 1;
     }
     if (my_strcmp(cmd[1], "-") == 0) {

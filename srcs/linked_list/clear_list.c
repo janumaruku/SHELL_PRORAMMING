@@ -6,11 +6,12 @@
 */
 
 #include "../../include/linked_list.h"
+#include "../../include/utils.h"
 
 void clear_list(linked_list_t **list, void (*func)(void *data))
 {
-    if (is_empty_list(*list)) {
-        free(*list);
+    if (*list == NULL || is_empty_list(*list)) {
+        mem_free(*list);
         return;
     }
     *list = pop_front(*list, func);

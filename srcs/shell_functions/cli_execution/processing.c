@@ -23,7 +23,7 @@ void func3(void *data)
 {
     char *d = (char *)data;
 
-    free(d);
+    mem_free(d);
 }
 
 int comma_handling(tree_t *tree)
@@ -73,7 +73,7 @@ int right_redirection_handling(tree_t *tree)
             dup2(fd, STDOUT_FILENO);
             close(fd);
             processing(tree->tleft);
-            free(past_dir);
+            mem_free(past_dir);
             free_job(job_list);
             free_2d_array(t_env);
             clear_list(&l_env, str_pop);
@@ -81,7 +81,7 @@ int right_redirection_handling(tree_t *tree)
             free_node(&top_reached, str_pop);
             free_node(&buttom_reached, str_pop);
             clean_tree(tree, func3);
-            free(cli);
+            mem_free(cli);
             exit(0);
         }
         waitpid(pid, NULL, WUNTRACED);
@@ -105,7 +105,7 @@ void simple_left(tree_t *tree)
         dup2(fd, STDIN_FILENO);
         close(fd);
         processing(tree->tleft);
-        free(past_dir);
+        mem_free(past_dir);
         free_job(job_list);
         free_2d_array(t_env);
         clear_list(&l_env, str_pop);
@@ -113,7 +113,7 @@ void simple_left(tree_t *tree)
         free_node(&top_reached, str_pop);
         free_node(&buttom_reached, str_pop);
         clean_tree(tree, func3);
-        free(cli);
+        mem_free(cli);
         exit(0);
     }
     waitpid(pid, NULL, WUNTRACED);
@@ -123,7 +123,7 @@ void simple_left(tree_t *tree)
 
 void post_execution_intruction(int fds[])
 {
-    free(past_dir);
+    mem_free(past_dir);
     free_job(job_list);
     free_2d_array(t_env);
     clear_list(&l_env, str_pop);
@@ -131,7 +131,7 @@ void post_execution_intruction(int fds[])
     free_node(&top_reached, str_pop);
     free_node(&buttom_reached, str_pop);
     clean_tree(command_tree, str_pop);
-    free(cli);
+    mem_free(cli);
     close(fds[0]);
     close(fds[1]);
 }
@@ -147,7 +147,7 @@ void double_left(tree_t *tree)
 
     pipe(fds);
     temp = my_strcat2(tree->tright->data, "\n");
-    free(tree->tright->data);
+    mem_free(tree->tright->data);
     tree->tright->data = temp;
     pid = fork();
     if (pid == 0) {
@@ -156,7 +156,7 @@ void double_left(tree_t *tree)
             write(fds[1], line, my_strlen(line));
             my_putstr("? ");
         }
-        free(line);
+        mem_free(line);
         post_execution_intruction(fds);
         exit(0);
     }

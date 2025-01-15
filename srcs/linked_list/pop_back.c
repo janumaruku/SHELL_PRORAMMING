@@ -11,7 +11,7 @@ linked_list_t *pop_back(linked_list_t *li, void (*func)(void *data))
 {
     node_t *tp = li->end;
 
-    if (is_empty_list(li))
+    if (li == NULL || is_empty_list(li))
         return li;
     if (li->lenght == 1) {
         li->begin = NULL;

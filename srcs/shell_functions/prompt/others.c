@@ -45,8 +45,8 @@ line_edition_t *end_of_file(line_edition_t *p)
         exit_cmd = malloc(sizeof(char *) * 2);
         exit_cmd[0] = my_strdup("exit");
         exit_cmd[1] = NULL;
-        free(p->cmd);
-        free(p);
+        mem_free(p->cmd);
+        mem_free(p);
         disable_raw_mode();
         my_exit(exit_cmd);
     }

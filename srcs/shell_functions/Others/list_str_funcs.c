@@ -16,13 +16,13 @@ void str_disp(void *data, void *sep, int b)
     my_putstr(d);
     if (b)
         my_putstr(s);
-}
+}//free
 
 void str_pop (void *data)
 {
     char *d = (char *)data;
 
-    free(d);
+    mem_free(d);
 }
 
 int env_var_search(void *expected, void *data)
@@ -40,9 +40,9 @@ void job_pop(void *data)
 {
     job_t *d = (job_t *)data;
 
-    free(d->cmd);
-    free(d->c_state);
-    free(d);
+    mem_free(d->cmd);
+    mem_free(d->c_state);
+    mem_free(d);
 }
 
 int job_search(void *expected, void *data)
@@ -64,7 +64,7 @@ char *get_job_num_str(int n)
     my_strcat(res, "[");
     my_strcat(res, str);
     my_strcat(res, "]");
-    free(str);
+    mem_free(str);
     return res;
 }
 
@@ -84,5 +84,5 @@ void print_job(void *data, void *sep, int b)
     printf("%-29s %s", d->c_state, d->cmd);
     if (b)
         printf("%s", s);
-    free(job_num_str);
+    mem_free(job_num_str);
 }

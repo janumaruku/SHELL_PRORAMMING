@@ -37,7 +37,7 @@ char *find_path(char *var, char *cmd)
             free_2d_array(var_tab);
             return str;
         }
-        free(str);
+        mem_free(str);
     }
     free_2d_array(var_tab);
     return NULL;
@@ -49,7 +49,7 @@ int interpretor(char **cmd)
     char *path = NULL;
     
     if (builtin(cmd)) {
-        free(path);
+        mem_free(path);
         exit_status = 0;
         return 0;
     }
@@ -57,19 +57,19 @@ int interpretor(char **cmd)
     path = find_path(var, cmd[0]);
     if (access(cmd[0], X_OK) == 0) {
         runner(cmd[0], cmd);
-        free(var);
-        free(path);
+        mem_free(var);
+        mem_free(path);
         return 0;
     }
     if (path) {
         runner(path, cmd);
-        free(var);
-        free(path);
+        mem_free(var);
+        mem_free(path);
         return 0;
     }
     fprintf(stderr, "%s: command not found.\n", cmd[0]);
     exit_status = 1;
-    free(var);
-    free(path);
+    mem_free(var);
+    mem_free(path);
     return 0;
 }

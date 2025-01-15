@@ -86,27 +86,11 @@ int multi_char_binding(line_edition_t *p)
 
     getchar();
     c = getchar();
-    // for (int i = 0; bindkey[i]; i++) {
-    //     if (c == bindkey[i]) {
-    //         p = func[i](p);
-    //         return 1;
-    //     }
-    // }
-    if (c == 'A') {
-        p = up_history(p);
-        return 1;
-    }
-    if (c == 'B') {
-        p = down_history(p);
-        return 1;
-    }
-    if (c == 'C') {
-        p = forward_char(p);
-        return 1;
-    }
-    if (c == 'D') {
-        p = backward_char(p);
-        return 1;
+    for (int i = 0; bindkey[i]; i++) {
+        if (c == bindkey[i]) {
+            p = func[i](p);
+            return 1;
+        }
     }
     return 0;
 }

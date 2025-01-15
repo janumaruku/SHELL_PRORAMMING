@@ -20,7 +20,7 @@ int my_exit(char **cmd)
 {
     if (isatty(0))
         my_putstr("exit\n");
-    free(past_dir);
+    mem_free(past_dir);
     free_job(job_list);
     free_2d_array(cmd);
     free_2d_array(t_env);
@@ -28,9 +28,9 @@ int my_exit(char **cmd)
     clear_list(&l_shell_var, str_pop);
     clear_list(&history, del_history);
     if (cli)
-        free(cli);
+        mem_free(cli);
     if (current_command != NULL)
-        free(current_command);
+        mem_free(current_command);
     if (command_tree)
         clean_tree(command_tree, str_pop);
     free_node(&top_reached, str_pop);

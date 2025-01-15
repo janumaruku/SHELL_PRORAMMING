@@ -12,6 +12,8 @@ linked_list_t *pop_element(linked_list_t *list, node_t *node,
 {
     node_t *tp = node->prev;
 
+    if (list == NULL)
+        return list;
     if (list->begin == node) {
         list = pop_front(list, func);
         return list;

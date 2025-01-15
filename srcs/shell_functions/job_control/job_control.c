@@ -21,7 +21,7 @@ void SIGTSTP_handler(int signum)
 {
     pnode_t node = job_list->curr;
 
-    free(_cur_process->c_state);
+    mem_free(_cur_process->c_state);
     _cur_process = set_job_state(STP, _cur_process);
     if (job_list->curr == NULL || _cur_process->num == 0) {
         _cur_process->num = job_list->last_id + 1;
@@ -56,33 +56,8 @@ void SIGCHLD_handler(int signuum)
 
 void job_control(int signum)
 {
-    if (signum == SIGINT) {
-        // kill(_cur_process->pid, SIGINT);
-        // printf("\n");
+    if (signum == SIGINT)
         SIGINT_handler(signum);
-    }
-    if (signum == SIGTSTP) {
-        // kill(_cur_process->pid, SIGSTOP);
-        // if (job_list->jobs->lenght == 0) {
-        //     _cur_process->num = 1;
-        //     job_list->last_id = 1;
-        // } else {
-        //     _cur_process->num = job_list->last_id + 1;
-        //     job_list->last_id++;
-        // }
-        // _cur_process = set_job_state(RUNG, _cur_process);
-        // job_list->jobs = push_back(job_list->jobs, _cur_process);
-        // // if (job_list->jobs->lenght == 0)
-        // //     job_list->curr = job_list->jobs->begin;
-        // // else {
-        // //     job_list->curr = job_list->jobs->end;
-        // //     job_list->next = job_list->curr->prev;
-        // // }
-        // node = job_list->curr;
-        // job_list->curr = job_list->jobs->end;
-        // job_list->next = node;
-        // _cur_process = NULL;
-        // printf("\nSuspended\n");
+    if (signum == SIGTSTP)
         SIGTSTP_handler(signum);
-    }
 }

@@ -38,7 +38,7 @@ int fg(char **cmd)
         node = search_node(job_list->jobs, &tmp, job_search);
         _cur_process = node->data;
     }
-    free(_cur_process->c_state);
+    mem_free(_cur_process->c_state);
     _cur_process = set_job_state(RUNG, _cur_process);
     set_sigaction(&sa);
     kill(_cur_process->pid, SIGCONT);

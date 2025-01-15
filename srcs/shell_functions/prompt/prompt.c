@@ -15,30 +15,6 @@ char *current_command;
 pnode_t top_reached;
 pnode_t buttom_reached;
 
-// char **prompt(void)
-// {
-//     char *line = NULL;
-//     size_t l = 0;
-//     int g = 0;
-//     char **exit_cmd = NULL;
-//     char **cmd = NULL;
-
-//     my_putstr("[janumaruku] user> ");
-//     g = getline(&line, &l, stdin);
-//     if (g == -1) {
-//         exit_cmd = malloc(sizeof(char *) * 2);
-//         exit_cmd[0] = my_strdup("exit");
-//         exit_cmd[1] = NULL;
-//         free(line);
-//         my_exit(exit_cmd);
-//     }
-//     if (is_empty_line(line))
-//         return NULL;
-//     cmd = split(line, cmd_seg);
-//     free(line);
-//     return cmd;
-// }
-
 line_edition_t *init_line_edition(void)
 {
     line_edition_t *p = malloc(sizeof(line_edition_t));
@@ -86,7 +62,7 @@ line_edition_t *enter(line_edition_t *p)
     p->cmd[p->len] = '\0';
     if (is_empty_str(p->cmd) || my_strlen(p->cmd) == 0) {
         disable_raw_mode();
-        free(p->cmd);
+        mem_free(p->cmd);
         p->cmd = NULL;
         return p;
     }
@@ -106,7 +82,7 @@ void while_prompting(int signum)
     if (signum == SIGINT) {
         printf("\n");
         m_prompt();
-        free(p->cmd);
+        mem_free(p->cmd);
         p->cmd = malloc(sizeof(char) * (COMMAND_MAX_LENGTH + 1));
         p->pos = 0;
         p->len = 0;
@@ -127,11 +103,9 @@ void prompt_sig_handler(struct sigaction *sa)
 char *prompt2(void)
 {
     char c = 0;
-    // char **res = NULL;
     char *res = NULL;
     p = init_line_edition();
     current_command = malloc(sizeof(char) * (COMMAND_MAX_LENGTH + 1));
-    // current_command = 0;
     struct sigaction sa;
 
     history->cursor = buttom_reached;
@@ -139,24 +113,23 @@ char *prompt2(void)
     enable_raw_mode();
     m_prompt();
     p->cmd[0] = 0;
-    // history->cursor = history->end;
     while (1) {
         c = getchar();
         if (c == '\n') {
             p = enter(p);
             if (!p->cmd) {
-                free(p);
+                mem_free(p);
                 if (current_command != NULL) {
-                    free(current_command);
+                    mem_free(current_command);
                     current_command = NULL;
                 }
                 return NULL;
             }
             res = my_strdup(p->cmd);
-            free(p->cmd);
-            free(p);
+            mem_free(p->cmd);
+            mem_free(p);
             if (current_command != NULL) {
-                free(current_command);
+                mem_free(current_command);
                 current_command = NULL;
             }
             return res;
@@ -169,18 +142,18 @@ char *prompt2(void)
             others(p, c);
             if (p->done) {
                 if (!p->cmd) {
-                    free(p);
+                    mem_free(p);
                     if (current_command != NULL) {
-                        free(current_command);
+                        mem_free(current_command);
                         current_command = NULL;
                     }
                     return NULL;
                 }
                 res = my_strdup(p->cmd);
-                free(p->cmd);
-                free(p);
+                mem_free(p->cmd);
+                mem_free(p);
                 if (current_command != NULL) {
-                    free(current_command);
+                    mem_free(current_command);
                     current_command = NULL;
                 }
                 return res;

@@ -23,7 +23,7 @@ jobs_t *init_job_list(void)
 void free_job(jobs_t *jobs)
 {
     clear_list(&(jobs->jobs), job_pop);
-    free(jobs);
+    mem_free(jobs);
 }
 
 job_t *set_job_state(job_status_t state, job_t *job)

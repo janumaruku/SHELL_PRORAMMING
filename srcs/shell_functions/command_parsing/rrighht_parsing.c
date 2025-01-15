@@ -84,7 +84,7 @@ tree_t *rright_parsing(char *str)
     }
     if (a[2] == 0)
         return rleft_parsing(str);
-    free(command[0]);
-    free(command);
+    mem_free(command[0]);
+    mem_free(command);
     return tr;
-}
+}//free

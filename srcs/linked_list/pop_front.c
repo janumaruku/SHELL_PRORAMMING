@@ -11,7 +11,7 @@ linked_list_t *pop_front(linked_list_t *list, void (*func)(void *data))
 {
     node_t *actuel = list->begin;
 
-    if (is_empty_list(list))
+    if (list == NULL || is_empty_list(list))
         return list;
     if (list->lenght == 1) {
         list->begin = NULL;

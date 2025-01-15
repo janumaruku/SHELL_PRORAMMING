@@ -26,7 +26,7 @@ int update_env(char **cmd)
         my_strcat(str, "=");
         if (cmd[2])
             my_strcat(str, cmd[2]);
-        free(node->data);
+        mem_free(node->data);
         node->data = str;
         return 1;
     }

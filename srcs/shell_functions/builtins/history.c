@@ -47,8 +47,8 @@ void del_history(void *data)
 {
     history_t *d = (history_t *)data;
 
-    free(d->command);
-    free(d);
+    mem_free(d->command);
+    mem_free(d);
 }
 
 int history_cmd(char **cmd)

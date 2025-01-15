@@ -6,6 +6,7 @@
 */
 
 #include "../../include/binary_tree.h"
+#include "../../include/utils.h"
 
 tree_t *clean_tree(tree_t *tree, void (*func)(void *))
 {
@@ -15,6 +16,6 @@ tree_t *clean_tree(tree_t *tree, void (*func)(void *))
     clean_tree(tree->tright, func);
     // printf("Deleting %s\n", tree->data);
     func(tree->data);
-    free(tree);
+    mem_free(tree);
     return NULL;
 }
